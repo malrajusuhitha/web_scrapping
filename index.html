@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Scraper</title>
+    <style>
+        /* Basic styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f2f2f2;
+            background-image: url('https://www.dice.com/binaries/medium/content/gallery/dice/insights/2022/12/gettyimages-1349094945.jpg');
+            background-size: 100% auto; /* Adjust background size */
+            background-repeat: no-repeat;
+            background-position: center top;e
+            animation: background-pulse 5s infinite;
+        }
+
+        h1 {
+            text-align: center;
+            color: #fff;
+            margin-top: 50px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            animation: title-fade 2s ease-in-out;
+        }
+
+        form {
+            background-color: rgba(255, 255, 255, 0.8);
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            animation: slide-in 0.5s ease-in-out, pulse 2s infinite alternate;
+        }
+
+        input[type="text"],
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: border-color 0.3s;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: dodgerblue;
+            animation: input-pulse 1s infinite;
+        }
+
+        input[type="submit"] {
+            background-color: dodgerblue;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #007bff;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            background-color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            animation: fade-in 0.5s ease-in-out;
+        }
+
+        h3 {
+            color: #333;
+            margin-top: 0;
+        }
+
+        p {
+            color: #666;
+            margin: 5px 0;
+        }
+
+        /* Define animations */
+        @keyframes slide-in {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes fade-in {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes background-pulse {
+            0% {
+                background-size: 100% auto;
+            }
+            50% {
+                background-size: 105% auto;
+            }
+            100% {
+                background-size: 100% auto;
+            }
+        }
+
+        @keyframes title-fade {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes input-pulse {
+            0% {
+                border-color: dodgerblue;
+                box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            }
+            50% {
+                border-color: #007bff;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            }
+            100% {
+                border-color: dodgerblue;
+                box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Job Scraper</h1>
+    <form method="post">
+        <label for="role">Role:</label>
+        <input type="text" id="role"name="role" placeholder="Enter job title" required><br>
+        <label for="location">Location:</label>
+        <input type="text" id="location" name="location" placeholder="Enter location" required><br>
+        <label for="experience">Experience:</label>
+        <input type="text" id="experience" name="experience" placeholder="Enter experience level" required><br>
+        <input type="submit" value="Search">
+    </form>
+    <h2>Job Results</h2>
+    {% if message %}
+    <p>{{ message }}</p>
+    {% else %}
+    <ul>
+        {% for job in jobs %}
+        <li>
+            <h3>{{ job.title }}</h3>
+            <p>{{ job.company }}</p>
+            <p>{{ job.location }}</p>
+            <p>{{ job.summary }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</body>
+</html>
